@@ -159,8 +159,40 @@ function renderMetricsGrid(current, daily, aqi, unit) {
     compassArrow.style.transform = `rotate(${current.wind_direction_10m}deg)`;
   }
 
-  // Humidity
-  document.getElementById('metric-humidity-val').textContent = `${current.relative_humidity_2m}%`;
+  // Humidity & Dew Point
+  const humidity = current.relative_humidity_2m;
+  document.getElementById('metric-humidity-val').textContent = `${humidity}%`;
+  
+  // Calculate approximate Dew Point from temp and humidity
+  const tempC = current.temperature_2m;
+  const dewPointC = tempC - ((100 - humidity) / 5);
+  const dewPointElem = document.getElementById('metric-dewpoint-val');
+  if (dewPointElem) {
+    dewPointElem.textContent = `Dew point: ${formatTemp(dewPointC, unit)}`;
+  }
+
+  // Humidity Level Badge & Arrow Indicator
+  const humidityBadge = document.getElementById('metric-humidity-badge');
+  const humidityArrow = document.getElementById('humidity-arrow');
+  if (humidityBadge) {
+    if (humidity <= 30) {
+      humidityBadge.textContent = 'Dry';
+      humidityBadge.style.background = '#38bdf8';
+      if (humidityArrow) humidityArrow.style.transform = 'rotate(180deg)'; // Arrow down (Low)
+    } else if (humidity <= 60) {
+      humidityBadge.textContent = 'Optimal';
+      humidityBadge.style.background = '#10b981';
+      if (humidityArrow) humidityArrow.style.transform = 'rotate(90deg)'; // Arrow side (Normal)
+    } else if (humidity <= 80) {
+      humidityBadge.textContent = 'Humid';
+      humidityBadge.style.background = '#f59e0b';
+      if (humidityArrow) humidityArrow.style.transform = 'rotate(0deg)'; // Arrow up (High)
+    } else {
+      humidityBadge.textContent = 'Very Humid';
+      humidityBadge.style.background = '#ef4444';
+      if (humidityArrow) humidityArrow.style.transform = 'rotate(0deg)'; // Arrow up (Very High)
+    }
+  }
 
   // Air Quality (AQI)
   const aqiVal = aqi ? aqi.us_aqi : null;
