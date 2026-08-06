@@ -202,7 +202,7 @@ function renderMetricsGrid(current, daily, aqi, unit) {
     aqiElem.textContent = aqiVal;
     if (aqiVal <= 50) { aqiBadge.textContent = 'Good'; aqiBadge.style.background = '#10b981'; }
     else if (aqiVal <= 100) { aqiBadge.textContent = 'Moderate'; aqiBadge.style.background = '#f59e0b'; }
-    else if (aqiVal <= 150) { aqiBadge.textContent = 'Unhealthy for Sensitive Groups'; aqiBadge.style.background = '#f97316'; }
+    else if (aqiVal <= 150) { aqiBadge.textContent = 'Unhealthy (SG)'; aqiBadge.style.background = '#f97316'; }
     else { aqiBadge.textContent = 'Unhealthy'; aqiBadge.style.background = '#ef4444'; }
   } else {
     aqiElem.textContent = 'N/A';
