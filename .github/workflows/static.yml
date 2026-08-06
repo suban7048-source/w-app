@@ -1,5 +1,4 @@
 # Simple workflow for deploying static content to GitHub Pages
-# Trigger clean GitHub Pages deployment
 name: Deploy static content to Pages
 
 on:
@@ -8,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -34,6 +33,13 @@ jobs:
         with:
           path: '.'
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (Actions Source)
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Deploy to gh-pages branch (Branch Source Fallback)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
