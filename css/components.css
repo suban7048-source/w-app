@@ -6,7 +6,7 @@
 .search-container {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -189,19 +189,12 @@
   color: var(--color-unhealthy);
 }
 
-/* Grid Layout */
+/* Vertical Layout */
 .weather-grid {
-  display: grid;
-  grid-template-columns: 1fr 320px;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   width: 100%;
-}
-
-@media (max-width: 1024px) {
-  .weather-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
 }
 
 /* Primary Current Weather Card */

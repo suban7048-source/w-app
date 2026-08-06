@@ -34,7 +34,7 @@ export function renderWeatherCanvas(theme) {
   const canvas = document.getElementById('weather-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  
+
   const resize = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -119,7 +119,7 @@ export function updateCurrentWeatherUI(data, locationName, countryName, unit = '
   });
 
   // Temperature and condition
-  document.getElementById('current-temp-val').textContent = Math.round(unit === 'F' ? (current.temperature_2m * 9/5 + 32) : current.temperature_2m);
+  document.getElementById('current-temp-val').textContent = Math.round(unit === 'F' ? (current.temperature_2m * 9 / 5 + 32) : current.temperature_2m);
   document.getElementById('current-temp-unit').textContent = `°${unit}`;
   document.getElementById('current-condition-text').textContent = meta.description;
   document.getElementById('current-feels-like').textContent = `Feels like ${formatTemp(current.apparent_temperature, unit)}`;
@@ -162,7 +162,7 @@ function renderMetricsGrid(current, daily, aqi, unit) {
   // Humidity & Dew Point
   const humidity = current.relative_humidity_2m;
   document.getElementById('metric-humidity-val').textContent = `${humidity}%`;
-  
+
   // Calculate approximate Dew Point from temp and humidity
   const tempC = current.temperature_2m;
   const dewPointC = tempC - ((100 - humidity) / 5);
