@@ -16,10 +16,15 @@ export function initWeatherMap(lat, lon, cityName) {
       attributionControl: false
     }).setView([lat, lon], 10);
 
-    // Dark styled OpenStreetMap / CartoDB dark tile layer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd'
+    // Dark styled ArcGIS World Dark Gray base (No API key required, no watermark)
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 16,
+      attribution: 'Esri, DeLorme, NAVTEQ'
+    }).addTo(mapInstance);
+
+    // Dark styled city and boundary reference labels overlay
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 16
     }).addTo(mapInstance);
 
     L.control.zoom({ position: 'topright' }).addTo(mapInstance);
