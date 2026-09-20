@@ -18,7 +18,7 @@
   --glass-bg: rgba(30, 41, 59, 0.55);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-hover: rgba(255, 255, 255, 0.25);
-  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   --glass-blur: blur(20px);
 
   --card-bg: rgba(255, 255, 255, 0.05);
@@ -118,20 +118,48 @@ body {
   z-index: 0;
 }
 
-/* Layout App Container */
-.app-wrapper {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 8px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
+/* ─── Desktop: single-page no-scroll layout ─── */
+@media (min-width: 1024px) {
+  body {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .app-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+/* ─── Mobile / Tablet: scrollable ─── */
+@media (max-width: 1023px) {
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .app-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 8px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 100vh;
+    height: auto;
+  }
 }
 
 /* Header Navbar */
@@ -171,7 +199,7 @@ body {
 }
 
 .brand-title {
-  font-size: clamp(0.95rem, 1.8vh, 1.1rem);
+  font-size: clamp(0.9rem, 1.8vh, 1.05rem);
   font-weight: 800;
   letter-spacing: -0.5px;
   background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
@@ -193,7 +221,7 @@ body {
   padding: 4px 9px;
   border-radius: var(--radius-sm);
   font-family: inherit;
-  font-size: clamp(0.72rem, 1.4vh, 0.8rem);
+  font-size: clamp(0.7rem, 1.3vh, 0.78rem);
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -201,6 +229,7 @@ body {
   gap: 4px;
   transition: all var(--transition-fast);
   backdrop-filter: blur(10px);
+  text-decoration: none;
 }
 
 .btn-glass:hover {
@@ -243,10 +272,10 @@ body {
 /* Footer */
 .app-footer {
   margin-top: auto;
-  padding: 4px 0;
+  padding: 4px 0 2px;
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -266,21 +295,8 @@ body {
   color: var(--accent-primary);
 }
 
-/* Responsive Mobile Fallback Breakpoints (< 1024px) */
-@media (max-width: 1023px) {
-  body {
-    overflow-y: auto;
-  }
-
-  .app-wrapper {
-    height: auto;
-    min-height: 100vh;
-    max-height: none;
-    overflow: visible;
-    padding: 8px 10px;
-    gap: 8px;
-  }
-
+/* Mobile overrides */
+@media (max-width: 600px) {
   .btn-glass span {
     display: none;
   }
@@ -288,6 +304,6 @@ body {
   .app-footer {
     flex-direction: column;
     gap: 2px;
-    padding: 8px 0 4px 0;
+    padding: 8px 0 4px;
   }
 }
